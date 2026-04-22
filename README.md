@@ -1,1 +1,5 @@
-Запуск в PyCharm через Run 'siteshurpa'
+<br>Сайт для ресторана "Шурпа"
+
+
+<br>Веб-сайт для ресторана «Шурпа». Проект написан на Django.
+<br>Запуск в PyCharm через Run 'siteshurpa'. 
