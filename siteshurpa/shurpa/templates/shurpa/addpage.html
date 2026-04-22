@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if perms.shurpa.change_shurpa %}
+      <!-- Menu section -->
+      <section class="menu-section" id="menu">
+        <h2 class="section-title2">Добавление блюда</h2>
+          <div class="section-content">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>{{ form.non_field_errors }}</div>
+            {% for f in form %}
+            <p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+            <div class="form-error">{{ f.errors }}</div>
+            {% endfor %}
+            <p><button type="submit" style="background: white">Отправить</button></p>
+        </form>
+          </div>
+      </section>
+{% endif %}
+{% endblock %}

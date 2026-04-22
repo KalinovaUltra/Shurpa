@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Чат с GPT</title>
+    <style>
+        .chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        .response {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h1>Задайте вопрос нашему помощнику</h1>
+        
+        <form method="post">
+            {% csrf_token %}
+            <textarea name="message" placeholder="Введите ваш вопрос..."></textarea>
+            <button type="submit">Отправить</button>
+        </form>
+        
+        {% if response %}
+            <div class="response">
+                <strong>Ответ:</strong> {{ response }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

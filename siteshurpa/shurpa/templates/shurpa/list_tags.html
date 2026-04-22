@@ -1,0 +1,17 @@
+{% if tags %}
+{% load static %}
+<div class="section-content">
+  <ul class="contact-info-list">
+    <li class="contact-info">
+      <i class="fa-solid fa-tags"></i>  <!-- Иконка для тегов -->
+      <p>Теги</p>
+    </li>
+    {% for t in tags %}
+    <li class="contact-info">
+      <i class="fa-solid fa-hashtag"></i>  <!-- Иконка для каждого тега -->
+      <p><a href="{{ t.get_absolute_url }}" class="nav-link" style="color: white;">{{ t.tag }}</a></p>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}

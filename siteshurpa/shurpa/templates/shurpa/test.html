@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link type="text/css" href="{% static 'shurpa/css/style.css' %}" rel="stylesheet" />
+</head>
+<body>
+<p>{{ menu|join:" | " }}</p> <!-- объединение -->
+<h1>{{ title }}</h1>
+<ul>
+    {% for p in posts %}
+    {% if p.is_published %}
+    <li>
+        <h2>{{ p.title }}</h2>
+        <p>{{ p.content }}</p>
+        <p><a href="{% url 'post' p.id %}">Читать пост</a></p>
+        {% if not forloop.last %}
+        <hr>
+        {%endif%}
+    </li>
+    {% endif %}
+    {% endfor %}
+</ul>
+</body>
+</html>

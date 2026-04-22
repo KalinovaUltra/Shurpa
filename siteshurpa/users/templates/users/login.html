@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <section class="menu-section" id="menu">
+    <h2 class="section-title2">Авторизация</h2>
+    <div class="section-content">
+        <form method="post">
+        {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}" />
+        <div>{{ form.non_field_errors }}</div>
+            {% for f in form %}
+            <p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+            <div class="form-error">{{ f.errors }}</div>
+            {% endfor %}
+        <p ><button type="submit" style="background: white">Войти</button></p>
+            <p ><a href="{% url 'users:password_reset' %}" style="color: white">Забыли пароль?</a></p>
+        </form>
+    </div>
+  </section>
+
+{% endblock %}

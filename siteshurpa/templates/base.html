@@ -1,0 +1,140 @@
+{% load static %}
+{% load shurpa_tags %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Шурпа</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="{% static 'shurpa/css/style.css' %}" />
+</head>
+
+  <body>
+    <!-- Header / -->
+    <header>
+      <nav class="navbar">
+        <a href="{% url 'home' %}" class="nav-logo">
+          <h2 class="logo-text">Шурпа</h2>
+        </a>
+
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="{% url 'chat' %}" class="nav-link">Помощь</a>
+          </li>
+          <li class="nav-item">
+            <a href="#menu" class="nav-link">Меню</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'otziv' %}" class="nav-link">Отзывы</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item"> <a href="{% url 'users:profile' %}" class="nav-link" class="nav-link"> {{ user.username }} </a> | <a href="{% url 'users:logout' %}" class="nav-link">Выйти</a></li>
+          {% else %}
+          <li class="nav-item"><a href="{% url 'users:login' %}" class="nav-link" class="nav-link">Войти</a> | <a href="{% url 'users:register' %}" class="nav-link">Регистрация</a></li>
+          {% endif %}
+          <li class="nav-item">
+            <a href="{% url 'about' %}" class="nav-link">О Ресторане</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'addpage' %}" class="nav-link">Добавить блюдо</a>
+          </li>
+
+        </ul>
+        <button id="menu-open-button" class="fas fa-bars"></button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero section -->
+      <!-- Menu -->
+{% block breadcrumbs %}{% endblock %}
+{% block content %} {% endblock %}
+<!-- Contact section -->
+<section class="contact-section" id="contact">
+  {% show_all_tags %}
+
+  <h2 class="section-title">Шурпа</h2>
+  <div class="section-content">
+    <!-- Контейнер для карты -->
+    <div id="footer-map" style="width: 100%; height: 300px; margin-bottom: 20px;"></div>
+
+    <ul class="contact-info-list">
+      <li class="contact-info">
+        <i class="fa-solid fa-location-crosshairs"></i>
+        <p>О ресторане</p>
+      </li>
+      <li class="contact-info">
+        <i class="fa-solid fa-location-crosshairs"></i>
+        <p>Меню</p>
+      </li>
+      <li class="contact-info">
+        <i class="fa-solid fa-location-crosshairs"></i>
+        <p>Акции</p>
+      </li>
+      <li class="contact-info">
+        <i class="fa-regular fa-envelope"></i>
+        <p>Отзывы</p>
+      </li>
+      <li class="contact-info">
+        <i class="fa-regular fa-clock"></i>
+        <p>Время работы</p>
+      </li>
+    </ul>
+
+    <form action="#" class="contact-form">
+      <input type="email" placeholder=" email" class="form-input" required />
+      <textarea placeholder="Сообщение" class="form-input" required></textarea>
+      <button type="submit" class="button submit-button">Подписаться</button>
+    </form>
+  </div>
+</section>
+
+<!-- API Яндекс Карт -->
+<script src="https://api-maps.yandex.ru/2.1/?apikey=73850975-0d39-4d1a-97e7-612cd6f0bc10&lang=ru_RU"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    ymaps.ready(init);
+
+    function init() {
+var myMap = new ymaps.Map("footer-map", {
+  center: [55.796341, 49.125], // Координаты Казани
+  zoom: 17 // Увеличенный масштаб для лучшего обзора здания
+});
+
+      var myPlacemark = new ymaps.Placemark([55.796341, 49.125], {
+        hintContent: 'Ресторан Шурпа',
+        balloonContent: 'Улица Карла Маркса, 71 к1'
+      }, {
+        preset: 'islands#redDotIcon'
+      });
+
+      myMap.geoObjects.add(myPlacemark);
+      myMap.controls.add('zoomControl');
+      myMap.controls.add('typeSelector');
+    }
+  });
+</script>
+
+      <!-- Footer-->
+<footer class="footer-section">
+        <div class="section-content">
+          <p class="copyright-text">© 2024 сеть ресторанов Шурпа</p>
+          <p class="copyright-text">Кабирова Алина гр.4321-21</p>
+
+          <div class="social-link-list">
+            <a href="#" class="social-link"><i class="fa-brands fa-telegram"></i></a>
+            <a href="#" class="social-link"><i class="fa-brands fa-vk"></i></a>
+            <a href="#" class="social-link"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+          </p>
+        </div>
+      </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

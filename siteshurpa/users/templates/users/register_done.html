@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <section class="menu-section" id="menu">
+    <h2 class="section-title2">Добро пожаловать!</h2>
+    <div class="section-content">
+        <p >Вы успешно зарегистрировались на сайте! Для входа в  систему необходимо авторизоваться по этой
+            <a href="{% url 'users:login' %}" style="background: white">ссылке</a>
+        </p>
+    </div>
+  </section>
+
+{% endblock %}

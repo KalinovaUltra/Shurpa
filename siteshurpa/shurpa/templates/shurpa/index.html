@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Hero section -->
+<section class="hero-section">
+  <div class="section-content">
+    <div class="hero-details">
+      <h3 class="subtitle">Национальная татарская кухня</h3>
+      <p class="description">Попробуйте щедрость местной земли и богатство ее полей, лесов и лугов на вкус в ресторане Шурпа</p>
+      <div class="buttons">
+        <a href="#" class="button order-now">Перейти в меню</a>
+      </div>
+    </div>
+    <div class="hero-image-wrapper">
+      <img src="https://cdn.culture.ru/images/4fa515bc-f11b-5eb3-9708-e8449269cebd">
+    </div>
+  </div>
+</section>
+
+<!-- Категории и меню -->
+<div class="content-with-sidebar">
+  <!-- Боковое меню категорий -->
+  <section class="menu-section" id="menu">
+    <h2 class="section-title">Меню</h2>
+    <div class="section-content">
+    <ul class="menu-list">
+      {% for cat in cats %}
+        <li class="section-title2">
+          <a href="{{ cat.get_absolute_url }}" class="nav-link" style="color: white;">{{ cat.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+    </div>
+  </section>
+
+  <!-- Основной контент (новинки) -->
+  <section class="menu-section" id="menu">
+    <!--<h2 class="section-title">Новинки</h2>-->
+    <div class="section-content">
+      <ul class="menu-list">
+        {% for p in posts %}
+          <li class="menu-item">
+            {% if p.image_url %}
+              <img src="{{ p.image_url }}" alt="{{ p.title }}"/>
+            {% else %}
+
+            {% if p.photo %}
+              <img src="{{p.photo.url}}" alt="No image">
+              <div class="menu-details">
+              </div>
+            {% endif %}
+            {% endif %}
+            <div class="menu-details">
+                  <div class=text>
+                    <p class="first">Категория: {{p.cat.name}}| Автор: {{p.author.username|default:"неизвестен"}}</p>
+                    <p class="last">Дата: {{p.time_update|date:"d-m-Y H:i:s"}}</p>
+                    </div>
+                <h3 class="name">
+                <a href="{{ p.get_absolute_url }}" class="nav-link" style="color: white;">
+                  {{ p.title }}
+                </a>
+              </h3>
+              <p class="text">{{ p.content }}</p>
+            </div>
+          </li>
+        {% empty %}
+          <li class="menu-item">
+            <div class="menu-details">
+              <h3 class="name">Нет доступных блюд</h3>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="menu-section" id="menu">
+  <h2 class="section-title2">{{ post.title }}</h2>
+
+  <div class="section-content">
+    <!-- Блок с калориями -->
+    {% if post.calorie %}
+    <div class="calorie-display">
+      <i class="fa-solid fa-fire"></i>
+      <span>Калорийность: {{ post.calorie.value }} ккал</span>
+    </div>
+    {% endif %}
+
+    <!-- Блок с тегами -->
+    {% with post.tags.all as tags %}
+      {% if tags %}
+      <div class="tags-wrapper">
+        <ul class="contact-info-list">
+          <li class="contact-info">
+            <i class="fa-solid fa-tags"></i>
+            <p>Теги:</p>
+          </li>
+          {% for t in tags %}
+          <li class="contact-info">
+            <p><a href="{{ t.get_absolute_url }}" class="nav-link" style="color: white;">{{ t.tag }}</a></p>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    {% endwith %}
+    <ul class="menu-list">
+      {% if post.photo %}
+      <img src="{{post.photo.url}}" style="width: 600px;">
+      <div class="menu-details">
+      </div>
+      {% endif %}
+    </ul>
+  </div>
+  <h2 class="section-title2">{{ post.content }}</h2>
+</section>
+
+
+{% endblock %}
