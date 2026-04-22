@@ -133,7 +133,7 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-YANDEX_CLOUD_API_KEY = "AQVN1lArMUYpZrm-w5hFLlEPdl1UG9Qc3HVv3grS"
+YANDEX_CLOUD_API_KEY = ""
 YANDEX_FOLDER_ID = "b1g0pkh6b0h3psj76a21"
 
 LOGIN_REDIRECT_URL = 'home'
