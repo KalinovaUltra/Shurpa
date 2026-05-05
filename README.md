@@ -3,4 +3,4 @@
 
 <br>Веб-сайт для ресторана «Шурпа». Проект написан на Django.
 <br>Запуск в PyCharm через Run 'siteshurpa'. 
-{settings.py пустой}
+<br>{settings.py пустой}
